@@ -1,0 +1,39 @@
+---
+# Ansible playbook to prepare to upgrade Debian.
+# This doesn't actually do the upgrade because I want to do that
+# manually to manually update config files, etc.
+
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: Disable puppet agent
+      command: puppet agent --disable
+      # Continue even if puppet isn't installed.
+      ignore_errors: yes
+
+    - name: Find sources files
+      find:
+        paths: /etc/apt
+        patterns: '*.list'
+      register: sources
+
+    - name: Replace release codename in sources files
+      replace:
+        regexp: stretch
+        replace: buster
+        path: "{{ item.path }}"
+      loop: "{{ sources.files }}"
+
+    - name: Update package cache
+      apt:
+        update_cache: yes
+        autoclean: yes
+
+  # https://www.debian.org/releases/buster/amd64/release-notes/ch-upgrading.en.html
+  # Manually upgrade: apt-get upgrade; apt full-upgrade
+
+# Local Variables:
+# coding: utf-8
+# End:
+...

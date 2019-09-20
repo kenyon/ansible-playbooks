@@ -1,0 +1,11 @@
+# -*- mode: conf -*-
+
+# My ansible inventory.
+
+darwin
+einstein
+galileo
+puppet
+
+[laptops]
+gauss

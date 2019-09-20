@@ -1,0 +1,5 @@
+---
+
+puppet_environments_repository: https://github.com/kenyon/puppet.git
+
+...

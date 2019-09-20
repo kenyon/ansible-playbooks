@@ -1,0 +1,51 @@
+---
+# Ansible role to build a Puppet server.
+
+- name: Install puppetserver
+  package:
+    name: puppetserver
+    state: latest
+
+- name: Install gems
+  gem:
+    name: "{{ item }}"
+    user_install: no
+  loop:
+    - r10k
+    - hiera-eyaml
+
+- name: Install puppetserver gems
+  gem:
+    name: "{{ item }}"
+    user_install: no
+    executable: /opt/puppetlabs/bin/puppetserver gem
+  loop:
+    - r10k
+    - hiera-eyaml
+
+- name: Create r10k config directory
+  file:
+    state: directory
+    path: /etc/puppetlabs/r10k
+
+- name: Create initial r10k config
+  template:
+    src: etc/puppetlabs/r10k/r10k.yaml.j2
+    dest: /etc/puppetlabs/r10k/r10k.yaml
+
+- name: Deploy Puppet environment
+  command: r10k deploy environment --verbose --puppetfile
+
+- name: Enable and start puppetserver
+  service:
+    name: puppetserver
+    enabled: yes
+    state: started
+
+- name: Enable and start puppet agent
+  service:
+    name: puppet
+    enabled: yes
+    state: started
+
+...

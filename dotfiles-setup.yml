@@ -1,0 +1,64 @@
+---
+# Ansible playbook to clone or update my ~/git/dotfiles repository,
+# and create the dotfile symlinks in my home directory.
+
+# ansible-playbook --inventory hostname_or_IP_address, --become --ask-become-pass ~/git/ansible-kenyon/dotfiles-setup.yml
+
+- hosts: all
+  strategy: free
+  tasks:
+
+    - name: Clone or update dotfiles repo from github
+      git:
+        repo: https://github.com/kenyon/dotfiles.git
+        dest: '{{ ansible_facts.env.HOME }}/git/dotfiles'
+        update: yes
+
+    - name: Create ~/.ssh
+      file:
+        state: directory
+        mode: '0700'
+        path: '{{ ansible_facts.env.HOME }}/.ssh'
+
+    - name: Create other directories
+      file:
+        state: directory
+        recurse: yes
+        path: '{{ ansible_facts.env.HOME }}/{{ item }}'
+      loop:
+        - .config/git
+        - .emacs.d
+        - .vim
+
+    - name: Create symlinks to dotfiles
+      file:
+        state: link
+        force: yes
+        path: '{{ ansible_facts.env.HOME }}/{{ item }}'
+        src: '{{ ansible_facts.env.HOME }}/git/dotfiles/{{ item }}'
+      loop:
+        - .aspell.en.prepl
+        - .aspell.en.pws
+        - .bash_aliases
+        - .bash_profile
+        - .bashrc
+        - .config/git/ignore
+        - .devscripts
+        - .dput.cf
+        - .emacs.d
+        - .gitconfig
+        - .inputrc
+        - .profile
+        - .quiltrc
+        - .screenrc
+        - .signature
+        - .ssh/config
+        - .tmux.conf
+        - .toprc
+        - .vim
+        - .vimrc
+        - .zlogin
+        - .zshenv
+        - .zshrc
+
+...

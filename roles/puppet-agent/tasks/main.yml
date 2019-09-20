@@ -1,0 +1,22 @@
+---
+# Ansible role to install, configure, enable, and start puppet agent as part of my initial
+# system setup tasks.
+
+- name: Enable the Puppet platform repository (Debian)
+  when: ansible_facts.os_family|lower == 'debian'
+  apt:
+    deb: https://apt.puppetlabs.com/puppet-release-{{ ansible_facts.distribution_release }}.deb
+
+- name: Install puppet-agent
+  package:
+    name: puppet-agent
+    state: latest
+    update_cache: yes
+
+- name: Enable and start puppet agent
+  service:
+    name: puppet
+    enabled: yes
+    state: started
+
+...

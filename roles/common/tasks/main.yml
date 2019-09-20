@@ -1,0 +1,7 @@
+---
+# Ansible role to perform common initial setup activities.
+
+# Don't need to do anything because necessary packages are installed
+# during Debian installation by vm-install's preseed.cfg.
+
+...
