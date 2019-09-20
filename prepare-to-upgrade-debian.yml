@@ -30,8 +30,10 @@
         update_cache: yes
         autoclean: yes
 
-  # https://www.debian.org/releases/buster/amd64/release-notes/ch-upgrading.en.html
-  # Manually upgrade: apt-get upgrade; apt full-upgrade
+    - debug:
+        msg:
+          - 'Now, the manual upgrade process: apt-get upgrade; apt full-upgrade'
+          - 'Reference: https://www.debian.org/releases/buster/amd64/release-notes/ch-upgrading.en.html'
 
 # Local Variables:
 # coding: utf-8
