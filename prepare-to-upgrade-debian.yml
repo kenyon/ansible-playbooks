@@ -5,35 +5,37 @@
 
 - hosts: all
   become: yes
+  vars:
+    old_release: stretch
+    new_release: buster
   tasks:
-
-    - name: Disable puppet agent
-      command: puppet agent --disable
-      # Continue even if puppet isn't installed.
-      ignore_errors: yes
-
-    - name: Find sources files
-      find:
-        paths: /etc/apt
-        patterns: '*.list'
-      register: sources
-
-    - name: Replace release codename in sources files
-      replace:
-        regexp: stretch
-        replace: buster
-        path: "{{ item.path }}"
-      loop: "{{ sources.files }}"
-
-    - name: Update package cache
-      apt:
-        update_cache: yes
-        autoclean: yes
-
-    - debug:
-        msg:
-          - 'Now, the manual upgrade process: apt-get upgrade; apt full-upgrade'
-          - 'Reference: https://www.debian.org/releases/buster/amd64/release-notes/ch-upgrading.en.html'
+    - block:
+        - name: Disable puppet agent
+          command: puppet agent --disable
+          # Continue even if puppet isn't installed.
+          ignore_errors: yes
+        - name: Find sources files
+          find:
+            paths: /etc/apt
+            patterns: '*.list'
+          register: sources
+        - name: Replace release codename in sources files
+          replace:
+            regexp: "{{ old_release }}"
+            replace: "{{ new_release }}"
+            path: "{{ item.path }}"
+          loop: "{{ sources.files }}"
+        - name: Update package cache
+          apt:
+            update_cache: yes
+            autoclean: yes
+        - debug:
+            msg:
+              - 'Now, the manual upgrade process: apt-get upgrade; apt full-upgrade'
+              - 'Reference: https://www.debian.org/releases/{{ new_release }}/amd64/release-notes/ch-upgrading.en.html'
+      when:
+        - ansible_facts['distribution'] == 'Debian'
+        - ansible_facts['distribution_release'] == old_release
 
 # Local Variables:
 # coding: utf-8
