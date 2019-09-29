@@ -2,10 +2,14 @@
 
 # My ansible inventory.
 
+[debian]
 darwin
 einstein
-galileo
+gauss
 puppet
+
+[macos]
+galileo
 
 [laptops]
 gauss
