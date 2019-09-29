@@ -5,7 +5,6 @@
 # ansible-playbook --inventory hostname_or_IP_address, --become --ask-become-pass ~/git/ansible-kenyon/dotfiles-setup.yml
 
 - hosts: all
-  strategy: free
   tasks:
 
     - name: Clone or update dotfiles repo from github
