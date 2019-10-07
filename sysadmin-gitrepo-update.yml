@@ -1,0 +1,19 @@
+---
+
+# Ansible playbook to update my ~/git/sysadmin repository.
+# Replacement for my ~/git/sysadmin/sysadmins_git perl script.
+
+- hosts: all
+  tasks:
+    - name: Update sysadmin repo
+      git:
+        repo: darwin.kenyonralph.com:git/sysadmin.git
+        dest: '{{ ansible_facts.env.HOME }}/git/sysadmin'
+        update: yes
+    - name: Update ssh_known_hosts
+      become: yes
+      copy:
+        dest: /etc/ssh/ssh_known_hosts
+        src: ~/git/sysadmin/ssh_known_hosts
+
+...
