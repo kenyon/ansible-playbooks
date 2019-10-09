@@ -15,3 +15,8 @@ galileo
 gauss
 gauss-wi
 gauss-tun ansible_host=2600:3c01:e002:7900::51
+
+[gauss]
+gauss
+gauss-wi
+gauss-tun
