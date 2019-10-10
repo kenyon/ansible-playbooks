@@ -17,7 +17,7 @@
 
     - name: Clone or update dotfiles repo from github
       git:
-        repo: https://github.com/kenyon/dotfiles.git
+        repo: git@github.com:kenyon/dotfiles.git
         dest: '{{ ansible_facts.env.HOME }}/git/dotfiles'
         update: yes
 
