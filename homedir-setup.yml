@@ -1,11 +1,19 @@
 ---
-# Ansible playbook to clone or update my ~/git/dotfiles repository,
-# and create the dotfile symlinks in my home directory.
-
-# ansible-playbook --inventory hostname_or_IP_address, --become --ask-become-pass ~/git/ansible-kenyon/dotfiles-setup.yml
+# Ansible playbook to set up or update my home directory and related stuff.
 
 - hosts: all
   tasks:
+    - name: Update sysadmin repo
+      git:
+        repo: darwin.kenyonralph.com:git/sysadmin.git
+        dest: '{{ ansible_facts.env.HOME }}/git/sysadmin'
+        update: yes
+
+    - name: Update ssh_known_hosts
+      become: yes
+      copy:
+        dest: /etc/ssh/ssh_known_hosts
+        src: ~/git/sysadmin/ssh_known_hosts
 
     - name: Clone or update dotfiles repo from github
       git:
