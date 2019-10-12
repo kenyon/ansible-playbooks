@@ -17,6 +17,7 @@
         - name: Find sources files
           find:
             paths: /etc/apt
+            recurse: yes
             patterns: '*.list'
           register: sources
         - name: Replace release codename in sources files
