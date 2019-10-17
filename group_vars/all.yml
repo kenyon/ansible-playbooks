@@ -1,0 +1,62 @@
+---
+
+ssh_known_hosts:
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHnBqFV5zS+ndtlSigJ4UUa29AApL5uswmmFe9Dh5W/utHtbuXmBCpQlQQVwoeQN8dVoClUHd/6hoo/jvI71BzU638Zsziu3sJaVvVkSXB9Zr8ImTT3h1WWFz/lTkRK4oL47glMUv+H0pJUaFRlXMafvXdMTT2OPmZE8F/MabWm4hLcqh/Ko8BCfe+GE6zRKdWp32LYv/Y5kcTb1rllEo4Na/zTX04xuT1Ac4hmFrSjDPJLKmHSO9KxNIpD1cgdXqnyZIGkxazZV7lUDmaPXynKotiTVrF3Mkz0lvpbqEM1pEPlYsryJnjHkehTrao2Iio8quzPIdtet9dPWLnOvv9 root@gauss
+    names: &gauss
+      - gauss
+      - gauss.local
+      - gauss-wi
+      - gauss-tun
+      - gauss.kenyonralph.com
+  - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBC7sF0dNl73ShsRfajshB/pQqlxN8ivpUrDXUIRUjed3DHOB9eBDiox0P/I8lSDNT93X8MvcgtSXcYCToTyv+IA= root@gauss
+    names: *gauss
+  - key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjDGTGa5B9hGj8EJtMGvGGdwTOjDrXr5ayutEayXWIO root@gauss
+    names: *gauss
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAzHRwgTD49Ok+okAKSN75dpCW39vOKj/WIjgcbO1MSDEWB8gNuzAR6pS7X0dU3xRLdvqnnJpbeH1QgNdZL42KykdA/kMP1u7iDb+x+CVCBnSX3xboO67uhlvzZ5DeVeenqCP8nXZe2ron9h6Ek6+ppBj26neZZA+w0UAiVcjmWpZu6tyml+5ebFqpsm5QeLwrEJ/KUSESTjpPx/s5TNZKOWmon9WEVKnU7eiQW+uZ8uzyXMjXxYmLhTImmabj4NFcE3Yhv/krE7Uw5rdVwEW+5KXSJmRjonVF1m2ZyB0yG+JmcGwdOt9oWHHMGqJOKnMTwg9JXCpwRDy3oG+993T0dQ== root@darwin
+    names: &darwin
+      - darwin
+      - darwin.kenyonralph.com
+      - 173.255.215.209
+      - 2600:3c01::f03c:91ff:fe93:b0d1
+      - kenyonralph.com
+  - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBKXDW/Z2sFmaluVjg7E5el1pNcE6ow2ixnLshUjNyZq0CWyRLi7CsHIsuZLGYrMT8WYocYd4so/YslaDBRreTMY= root@darwin
+    names: *darwin
+  - key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIv4RWF8z3/cFXilpsHlqUI0RCdxWVKxGLoyM4xloQRv root@darwin
+    names: *darwin
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGsvrpsky8KORBCApL6t/bcwOeWgtwlq9r4KT7DngxtFo/+b3h/Z7XCbrF5QWh0dQNqv/IBBzBorgfNj5YUz95fnmuRdDgK4zWjKioSrdlWlP2E5lDiKSceb0EL8k9za2QbTifrdya9oyMRuBWNij6JwD/FfOTYIP1Zre9PbLYCc0E13XhWDWoPNND/Rc+oi3qiRhOqKZTY/BK/GIz6vS5hP9p5aePgx4JpoUMndT2m8HpCqJJBJk5Xl2X+ekaKNG0jNwGHXumzAqHml0rmVTONHCiufDIp/a78dKdJRtsPxs42R84tCLzbDegzVbvdkA7GfKCBfuQrO1pnVpeilHZ root@einstein
+    names: &einstein
+      - einstein
+      - einstein.kenyonralph.com
+  - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJCq/itOjURSkwD0N551LFNJzd9a8grgi/W0aNF3abngiBUm/+QOgy0TDsG3LUZsO8doTWvmxB2rSDvPIuTjBa8= root@einstein
+    names: *einstein
+  - key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO6JhMp1iWslik8qiRmdiAVUlgjZN8IyG5iokL5lFKYp root@einstein
+    names: *einstein
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTgU2aUT/K2l1fOHScGz3f1llY1Whzt4DzmubwonyypxBS6PdXMaMs7rJ7hqwil50bN5IfluI766IFZfzz++Os4jGTDh7Ri4lr1pqiM2alieJfddLpH9JEgDfXGx7xTLV4+iKKagzDIdf/WHGwmfuK2j9pDBUuzz3igDkcJOOC91RgcUn/+v06c/21aS3n68psozTO2JkEwYlcQDozwW/eE3vwNNWdtMzd4Lyfvh6amWus6vt/hOh1TS5SM37NBRYS5jpcm39ZMhzc/+HPUt3uU0ht7FJFO0n8Dn0+QaeCR+c4y7jbGKXuGRgNPDNjGoV8Q+N0sw95ObZV2Qqeuood
+    names: &turing
+      - turing
+      - turing.kenyonralph.com
+      - 10.0.0.1
+  - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBAr4mZeYB3lqS3Xw9V8Lp+PNhELJLqUNb8M6+D++Qm8WUD+zxwuc2pgnjimr5wVSv5iS/w96O4PUFAaRcWBJTzI=
+    names: *turing
+  - key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIHgJAOsIt2Q50bojzd/B3OlV3LIkg3C+fp/WeEwJqLX
+    names: *turing
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxD4iEPoeNC+6/nIKa4NAMPbEhCJZJNJRx1wmGCTQa85SthIgXAAAiwrXrBKbjEkzb0AJGbQbtIQY+lln9acDmEtZdsHShklIFeLa3QCoDHaVS7rmc9UgtKQx3bqlwPGveOfDfaFsU5gEfDI1ZqAyCpKnHBuE6S5WkmGobhtnnjJMeVEiNdjJtq4/2S1KyQRUvvMpPqyckgxziXqYGmUNFLb7j6Z0YdaaY0qL74+SqxGCkVMCYjy5JEIZdv9UhyXnbSI2cVqOU7zypk/A69WeyiEwQvXUn5xK8usjA9jFsDi0ULinmmfP+Ux7g8woS3S+7vLU5N9ynR82YjHD0rEPB
+    names: &galileo
+      - galileo
+      - galileo.kenyonralph.com
+  - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBkGpSbI1sgGVz+tnptE7V0xfdh5SUebQAkmf+OBcXqyDQwWZSIHILWB3XevmmwWChFgI+vjuCbUceos96Qgsn4=
+    names: *galileo
+  - key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjhXAwk7deRXugeQENQSzcI97DAdUAwqBo5115YyLqd
+    names: *galileo
+  - key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAIXJ8SyXG2St6DgT6gQmkQSsX3pyp5FcQoSy/R2x9i
+    names: &lish_fremont
+      - lish-fremont.linode.com
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDb9siUm3yq4fVBYPtLh3Dg6VofNkgbRb9GaL+8q4uRRcQCOqVjGdB1ur6qZCQxknDKPwNvMuEYbWia/3svvbjCESkZAc8+DjLwe1gNE9fZ+x+KNOZTKmrQRh2+anYVi9oaHFwY/oNnfr9KeEKtRHd1lHTExO2mdyeAS1Ly+A5P6sjWyTLcOHQWGYEXxzwbsyjrmgjIHnmqRpKxlrBsdUokLKcFQvzuB3xiH2fvdXPlBJQcUb7g9tuITWzsjz6lozVPSQuvOJHthDZVIEfkT49F+Cpe9xviIAd/XqZG6xtosK/4Eu4Hof13jlT1uli9ZXnn0ROS6wKGsmLl3YWBG6DL
+    names: *lish_fremont
+  - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEptV+WZ7MZXFnIEV9GXDEstViqlLKTSw9QY9qNE4CERwO537KAlYAaDoPut5YT4TpCZgqP32B1ECHc3LSD987o=
+    names: *lish_fremont
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+    names: &github
+      - github.com
+
+...
