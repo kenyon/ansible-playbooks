@@ -5,18 +5,10 @@
 [debian]
 darwin
 einstein
-gauss
-puppet
+puppet ansible_host=2606:6000:cd04:400:5054:ff:fe58:b9ea
 
 [macos]
 galileo
 
 [laptops]
 gauss
-gauss-wi
-gauss-tun ansible_host=2600:3c01:e002:7900::51
-
-[gauss]
-gauss
-gauss-wi
-gauss-tun
