@@ -12,6 +12,12 @@
         key: '{{ item.names|join(",") }} {{ item.key }}'
       loop: '{{ ssh_known_hosts }}'
 
+    - name: Ensure git is installed
+      become: '{{ "yes" if ansible_facts.os_family != "Darwin" }}' # homebrew shall not run as root
+      package:
+        name: git
+        state: latest
+
     - name: Update sysadmin repo
       git:
         repo: darwin.kenyonralph.com:git/sysadmin.git
