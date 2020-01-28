@@ -1,16 +1,16 @@
 ---
 
 ssh_known_hosts:
-  - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHnBqFV5zS+ndtlSigJ4UUa29AApL5uswmmFe9Dh5W/utHtbuXmBCpQlQQVwoeQN8dVoClUHd/6hoo/jvI71BzU638Zsziu3sJaVvVkSXB9Zr8ImTT3h1WWFz/lTkRK4oL47glMUv+H0pJUaFRlXMafvXdMTT2OPmZE8F/MabWm4hLcqh/Ko8BCfe+GE6zRKdWp32LYv/Y5kcTb1rllEo4Na/zTX04xuT1Ac4hmFrSjDPJLKmHSO9KxNIpD1cgdXqnyZIGkxazZV7lUDmaPXynKotiTVrF3Mkz0lvpbqEM1pEPlYsryJnjHkehTrao2Iio8quzPIdtet9dPWLnOvv9 root@gauss
+  - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOhtMpcQu74CVv6P17DhTvvPOpGj49UYGUQ0zbWlBvZJUbCBrz86/k3dXtOdhO+urj5lCXc3ImVSu22vOboGTio= root@gauss
     names: &gauss
       - gauss
       - gauss.local
       - gauss-wi
       - gauss-tun
       - gauss.kenyonralph.com
-  - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBC7sF0dNl73ShsRfajshB/pQqlxN8ivpUrDXUIRUjed3DHOB9eBDiox0P/I8lSDNT93X8MvcgtSXcYCToTyv+IA= root@gauss
+  - key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICFcK0b6m/gPpxQI9mpS10Uqfm+yBcZpoXtzihjtrOhD root@gauss
     names: *gauss
-  - key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFjDGTGa5B9hGj8EJtMGvGGdwTOjDrXr5ayutEayXWIO root@gauss
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGMlZg7F2dMSND2DjTdSpp1xL2OA5ykP+3dwl6fnqpPuPw+/GyLxYF6zF70zYj+zOfScJ/32FH+qSJ1sgQoiA37KtehNmSyj3YXwtwBTuoUeXBRhbdVgfD71tQVQDbKVIvmwnIl6Zo3ixgBsg5Zr4b5b80CLbANIvfHpX3BvvvSEvWYbRmH+puStcQwwvaq9TBUXveDlGdo2LuLtDI9T2rpdN2j+X/U9RraoWbkBnTgv0pplJoPGXwtzHIi+8b0K0gKrEtWq4nObmbc2irdNSEQ76OSAdc/xtMVfCssqUFToRQPAFlJoR7P/nhBa5QBTMBjU6uQtfeN8jYyyanjmkD root@gauss
     names: *gauss
   - key: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAzHRwgTD49Ok+okAKSN75dpCW39vOKj/WIjgcbO1MSDEWB8gNuzAR6pS7X0dU3xRLdvqnnJpbeH1QgNdZL42KykdA/kMP1u7iDb+x+CVCBnSX3xboO67uhlvzZ5DeVeenqCP8nXZe2ron9h6Ek6+ppBj26neZZA+w0UAiVcjmWpZu6tyml+5ebFqpsm5QeLwrEJ/KUSESTjpPx/s5TNZKOWmon9WEVKnU7eiQW+uZ8uzyXMjXxYmLhTImmabj4NFcE3Yhv/krE7Uw5rdVwEW+5KXSJmRjonVF1m2ZyB0yG+JmcGwdOt9oWHHMGqJOKnMTwg9JXCpwRDy3oG+993T0dQ== root@darwin
     names: &darwin
