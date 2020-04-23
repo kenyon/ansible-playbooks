@@ -20,11 +20,11 @@
 
     - name: Update sysadmin repo
       git:
-        repo: darwin.kenyonralph.com:git/sysadmin.git
+        repo: git@gitlab.com:kenyon/sysadmin.git
         dest: '{{ ansible_facts.env.HOME }}/git/sysadmin'
         update: yes
 
-    - name: Clone or update dotfiles repo from github
+    - name: Clone or update dotfiles repo
       git:
         repo: git@github.com:kenyon/dotfiles.git
         dest: '{{ ansible_facts.env.HOME }}/git/dotfiles'
