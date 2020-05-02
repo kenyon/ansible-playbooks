@@ -5,10 +5,16 @@
 [debian]
 darwin
 einstein
-puppet ansible_host=2606:6000:cd04:400:5054:ff:fe58:b9ea
+puppet
 
 [macos]
 galileo
 
-[laptops]
+[laptop]
 gauss
+
+[linode]
+darwin
+
+[vultr]
+puppet
