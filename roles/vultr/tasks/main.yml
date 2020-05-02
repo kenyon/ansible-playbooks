@@ -45,6 +45,7 @@
       - exim4*
       - mdadm
       - nano
+      - rdnssd
       - resolvconf
     state: absent
     purge: yes
