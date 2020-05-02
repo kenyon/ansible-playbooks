@@ -1,0 +1,66 @@
+---
+
+- name: Create swap file
+  command:
+    cmd: dd if=/dev/zero of=/swap bs=1M count=256
+    creates: /swap
+  register: create_swap
+
+- name: Set up swap file
+  command: mkswap /swap
+  when: create_swap is changed
+
+- name: Activate swap file
+  command: swapon /swap
+  when: create_swap is changed
+
+- name: Ensure swap file is in /etc/fstab
+  mount:
+    src: /swap
+    path: none
+    fstype: swap
+    opts: sw
+    state: present
+
+- name: Create kenyon account
+  user:
+    name: kenyon
+    comment: Kenyon Ralph
+    groups:
+      - sudo
+
+- name: Set my authorized SSH key
+  authorized_key:
+    user: kenyon
+    key: "{{ lookup('file', '/home/kenyon/.ssh/id_ed25519.pub') }}"
+
+- name: Lock root password
+  user:
+    name: root
+    password_lock: yes
+
+- name: Remove some default packages
+  apt:
+    name:
+      - exim4*
+      - mdadm
+      - nano
+      - resolvconf
+    state: absent
+    purge: yes
+
+- name: Remove legacy IP configuration
+  lineinfile:
+    path: /etc/network/interfaces
+    regexp: 'iface [\w]+ inet '
+    state: absent
+
+- name: Configure /etc/resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    line: '{{ item }}'
+  loop:
+    - domain kenyonralph.com
+    - options edns0
+
+...

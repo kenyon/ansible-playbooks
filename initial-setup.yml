@@ -3,8 +3,13 @@
 # To run:
 # ansible-playbook --limit <hostname> --vault-id ~/.ansible/vault-password --become --verbose ~/git/ansible-kenyon/initial-setup.yml
 
+# For initial setup of a Vultr VM, use --user root.
+
 - hosts: all
   tasks:
+    - when: "'vultr' in group_names"
+      import_role:
+        name: vultr
     - import_role:
         name: common
     - import_role:
