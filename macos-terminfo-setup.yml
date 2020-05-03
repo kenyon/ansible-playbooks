@@ -11,7 +11,7 @@
   tasks:
     - name: Ensure ~/.terminfo directory exists
       file:
-        path: "{{ ansible_facts.env.HOME }}/.terminfo"
+        path: "{{ ansible_user_dir }}/.terminfo"
         state: directory
     - name: Ensure ncurses is installed from brew
       homebrew:

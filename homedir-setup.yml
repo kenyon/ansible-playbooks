@@ -23,26 +23,26 @@
     - name: Update sysadmin repo
       git:
         repo: git@gitlab.com:kenyon/sysadmin.git
-        dest: '{{ ansible_facts.env.HOME }}/git/sysadmin'
+        dest: '{{ ansible_user_dir }}/git/sysadmin'
         update: yes
 
     - name: Clone or update dotfiles repo
       git:
         repo: git@gitlab.com:kenyon/dotfiles.git
-        dest: '{{ ansible_facts.env.HOME }}/git/dotfiles'
+        dest: '{{ ansible_user_dir }}/git/dotfiles'
         update: yes
 
     - name: Create ~/.ssh
       file:
         state: directory
         mode: '0700'
-        path: '{{ ansible_facts.env.HOME }}/.ssh'
+        path: '{{ ansible_user_dir }}/.ssh'
 
     - name: Create other directories
       file:
         state: directory
         recurse: yes
-        path: '{{ ansible_facts.env.HOME }}/{{ item }}'
+        path: '{{ ansible_user_dir }}/{{ item }}'
       loop:
         - .config/git
         - .emacs.d
@@ -52,8 +52,8 @@
       file:
         state: link
         force: yes
-        path: '{{ ansible_facts.env.HOME }}/{{ item }}'
-        src: '{{ ansible_facts.env.HOME }}/git/dotfiles/{{ item }}'
+        path: '{{ ansible_user_dir }}/{{ item }}'
+        src: '{{ ansible_user_dir }}/git/dotfiles/{{ item }}'
       loop:
         - .aspell.en.prepl
         - .aspell.en.pws
