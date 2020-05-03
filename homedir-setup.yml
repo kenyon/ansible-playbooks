@@ -1,9 +1,11 @@
 ---
 # Ansible playbook to set up or update my home directory and related stuff.
 
+# FIXME: all of this should be managed with puppet instead. remove
+# this playbook once I have puppet managing these things.
+
 - hosts: all
   tasks:
-    # FIXME: remove this task once I'm managing ssh_known_hosts with puppet.
     - name: Update ssh_known_hosts
       become: yes
       known_hosts:
