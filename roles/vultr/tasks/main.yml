@@ -1,5 +1,7 @@
 ---
 
+# Tasks for a brand new Debian 10 IPv6-only Vultr VM.
+
 - name: Create swap file
   command:
     cmd: dd if=/dev/zero of=/swap bs=1M count=256
