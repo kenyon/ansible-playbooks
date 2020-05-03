@@ -2,19 +2,15 @@
 
 # My ansible inventory.
 
-[debian]
-darwin
 einstein
-puppet
-
-[macos]
 galileo
-
-[laptop]
 gauss
 
 [linode]
 darwin
 
 [vultr]
+puppet
+
+[puppetserver]
 puppet

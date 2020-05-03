@@ -7,12 +7,15 @@
 
 - hosts: all
   tasks:
-    - when: "'vultr' in group_names"
-      import_role:
+    - import_role:
         name: vultr
+      when: "'vultr' in group_names"
     - import_role:
         name: common
     - import_role:
         name: puppet-agent
+    - import_role:
+        name: puppetserver
+      when: "'puppetserver' in group_names"
 
 ...
