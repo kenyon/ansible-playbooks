@@ -47,6 +47,7 @@
       - nano
       - rdnssd
       - resolvconf
+      - rsyslog
     state: absent
     purge: yes
 
