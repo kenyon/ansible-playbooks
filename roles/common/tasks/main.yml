@@ -1,7 +1,14 @@
 ---
 # Ansible role to perform common initial setup activities.
 
-# Don't need to do anything because necessary packages are installed
-# during Debian installation by vm-install's preseed.cfg.
+- name: Install packages
+  when: ansible_facts.os_family == 'Debian'
+  apt:
+    name:
+      - aptitude
+      - etckeeper
+      - python-apt
+      - python3-apt
+      - wget
 
 ...
