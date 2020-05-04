@@ -1,9 +1,11 @@
 ---
 # Ansible role to build a Puppet server.
 
-- name: Install puppetserver
+- name: Install puppetserver and ruby
   package:
-    name: puppetserver
+    name:
+      - puppetserver
+      - ruby
     state: latest
 
 - name: Install gems
