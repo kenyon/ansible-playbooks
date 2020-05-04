@@ -20,7 +20,7 @@
         name: git
         state: latest
 
-    - name: Update sysadmin repo
+    - name: Clone or update sysadmin repo
       git:
         repo: git@gitlab.com:kenyon/sysadmin.git
         dest: '{{ ansible_user_dir }}/git/sysadmin'
@@ -30,6 +30,12 @@
       git:
         repo: git@gitlab.com:kenyon/dotfiles.git
         dest: '{{ ansible_user_dir }}/git/dotfiles'
+        update: yes
+
+    - name: Clone or update scripts repo
+      git:
+        repo: git@gitlab.com:kenyon/scripts.git
+        dest: '{{ ansible_user_dir }}/git/scripts'
         update: yes
 
     - name: Create ~/.ssh
@@ -47,6 +53,15 @@
         - .config/git
         - .emacs.d
         - .vim
+
+    - name: Create other directories (einstein)
+      when: inventory_hostname == 'einstein'
+      file:
+        state: directory
+        recurse: yes
+        path: '{{ ansible_user_dir }}/{{ item }}'
+      loop:
+        - .xmonad
 
     - name: Create symlinks to dotfiles
       file:
@@ -78,5 +93,19 @@
         - .zlogin
         - .zshenv
         - .zshrc
+
+    - name: Create symlinks to dotfiles (einstein)
+      when: inventory_hostname == 'einstein'
+      file:
+        state: link
+        force: yes
+        path: '{{ ansible_user_dir }}/{{ item }}'
+        src: '{{ ansible_user_dir }}/git/dotfiles/hosts/einstein/{{ item }}'
+      loop:
+        - .Xmodmap
+        - .mailcap
+        - .xmobarrc
+        - .xmonad/xmonad.hs
+        - .xsession
 
 ...
