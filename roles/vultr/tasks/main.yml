@@ -41,18 +41,6 @@
     name: root
     password_lock: yes
 
-- name: Remove some default packages
-  apt:
-    name:
-      - exim4*
-      - mdadm
-      - nano
-      - rdnssd
-      - resolvconf
-      - rsyslog
-    state: absent
-    purge: yes
-
 - name: Remove legacy IP configuration
   lineinfile:
     path: /etc/network/interfaces
