@@ -10,8 +10,6 @@ gauss
 
 [linode]
 darwin
-
-[vultr]
 puppet
 
 [puppetserver]
