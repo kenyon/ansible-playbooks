@@ -2,6 +2,8 @@
 
 # My ansible inventory.
 
+localhost ansible_python_interpreter=/usr/bin/python3
+
 einstein
 galileo
 gauss
