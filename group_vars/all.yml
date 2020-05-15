@@ -1,5 +1,6 @@
 ---
 
+# FIXME: remove this variable once I have puppet managing ssh known hosts.
 ssh_known_hosts:
   - key: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOhtMpcQu74CVv6P17DhTvvPOpGj49UYGUQ0zbWlBvZJUbCBrz86/k3dXtOdhO+urj5lCXc3ImVSu22vOboGTio= root@gauss
     names: &gauss
