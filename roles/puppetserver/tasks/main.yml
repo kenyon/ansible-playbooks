@@ -8,6 +8,14 @@
       - ruby
     state: latest
 
+- name: Configure puppetserver for lower memory usage
+  replace:
+    path: /etc/default/puppetserver
+    regexp: '{{ item }}'
+  loop:
+    - -Xms([\d]+[kKmMgG]?)
+    - -Xmx([\d]+[kKmMgG]?)
+
 - name: Install gems
   gem:
     name: "{{ item }}"
