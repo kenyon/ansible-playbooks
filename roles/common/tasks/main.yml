@@ -2,18 +2,16 @@
 # Ansible role to perform common initial setup activities.
 
 - name: Remove some packages
+  when: ansible_facts.os_family == 'Debian'
   apt:
     name:
       - exim4*
-      - mdadm
       - nano
-      - rdnssd
       - resolvconf
-      - rsyslog
     state: absent
     purge: yes
 
-- name: Install packages
+- name: Install some packages
   when: ansible_facts.os_family == 'Debian'
   apt:
     name:
