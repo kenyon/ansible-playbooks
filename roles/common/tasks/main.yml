@@ -8,6 +8,12 @@
     groups:
       - sudo
 
+- name: Configure my sudo privileges
+  lineinfile:
+    path: /etc/sudoers
+    line: 'kenyon ALL = (ALL:ALL) NOPASSWD: ALL'
+    validate: /usr/sbin/visudo --check --file %s
+
 - name: Set my authorized SSH key
   authorized_key:
     user: kenyon
