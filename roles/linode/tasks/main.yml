@@ -1,0 +1,29 @@
+---
+# Tasks for setup of a Debian 10 Linode.
+
+- name: Remove some packages
+  when: ansible_facts.os_family == 'Debian'
+  apt:
+    name:
+      - debian-faq
+      - discover
+      - doc-debian
+      - eject
+      - grub*
+      - haveged
+      - hdparm
+      - installation-report
+      - iotop
+      - isc-dhcp*
+      - kbd
+      - laptop-detect
+      - linux-image-amd64
+      - netcat-traditional
+      - pciutils
+      - powermgmt-base
+      - sysstat
+      - telnet
+    state: absent
+    purge: yes
+
+...

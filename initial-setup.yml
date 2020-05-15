@@ -3,13 +3,16 @@
 # To run:
 # ansible-playbook --limit <hostname> --become --verbose ~/git/ansible-kenyon/initial-setup.yml
 
-# For initial setup of a Vultr VM, use --user root.
+# For initial setup of a Linode or Vultr VM, use --user root.
 
 - hosts: all
   tasks:
-    - import_role:
-        name: vultr
-      when: "'vultr' in group_names"
+    - include_role:
+        name: '{{ item }}'
+      when: item in group_names
+      loop:
+        - linode
+        - vultr
     - import_role:
         name: common
     - import_role:
