@@ -4,9 +4,9 @@
 - name: Create kenyon account
   user:
     name: kenyon
-    comment: Kenyon Ralph
     groups:
       - sudo
+    append: yes
 
 - name: Configure my sudo privileges
   lineinfile:
