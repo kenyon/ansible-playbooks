@@ -1,7 +1,7 @@
 ---
 # Ansible playbook for initial setup of a new machine.
 # To run:
-# ansible-playbook --limit <hostname> --become --verbose ~/git/ansible-kenyon/initial-setup.yml
+# ansible-playbook --limit <hostname> --become --verbose initial-setup.yml
 
 # For initial setup of a Linode or Vultr VM, use --user root.
 
