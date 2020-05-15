@@ -1,5 +1,5 @@
 ---
-# Ansible playbook for initial setup of a generic new machine.
+# Ansible playbook for initial setup of a new machine.
 # To run:
 # ansible-playbook --limit <hostname> --become --verbose ~/git/ansible-kenyon/initial-setup.yml
 
