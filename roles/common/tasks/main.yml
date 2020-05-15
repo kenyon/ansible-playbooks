@@ -31,6 +31,7 @@
 - name: Install some packages
   when: ansible_facts.os_family == 'Debian'
   apt:
+    update_cache: yes
     name:
       - aptitude
       - etckeeper
