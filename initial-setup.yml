@@ -5,7 +5,7 @@
 
 # For initial setup of a Linode or Vultr VM, use --user root.
 
-- hosts: all
+- hosts: all:!macos
   tasks:
     - include_role:
         name: '{{ item }}'
