@@ -37,4 +37,14 @@
     - domain kenyonralph.com
     - options edns0
 
+- name: Remove some packages
+  when: ansible_facts.os_family == 'Debian'
+  apt:
+    name:
+      - mdadm
+      - rdnssd
+      - rsyslog
+    state: absent
+    purge: yes
+
 ...
