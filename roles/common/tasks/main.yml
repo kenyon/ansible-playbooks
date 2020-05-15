@@ -1,6 +1,23 @@
 ---
 # Ansible role to perform common initial setup activities.
 
+- name: Create kenyon account
+  user:
+    name: kenyon
+    comment: Kenyon Ralph
+    groups:
+      - sudo
+
+- name: Set my authorized SSH key
+  authorized_key:
+    user: kenyon
+    key: "{{ lookup('file', '/home/kenyon/.ssh/id_ed25519.pub') }}"
+
+- name: Lock root password
+  user:
+    name: root
+    password_lock: yes
+
 - name: Remove some packages
   when: ansible_facts.os_family == 'Debian'
   apt:
