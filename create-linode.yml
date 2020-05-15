@@ -6,7 +6,7 @@
   connection: local
   vars:
     my_username: kenyon
-    swap_size: 256
+    swap_size: 2048
     region: us-west
     image: linode/debian10
     linode_type: g6-nanode-1
