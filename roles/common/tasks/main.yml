@@ -1,6 +1,10 @@
 ---
 # Ansible role to perform common initial setup activities.
 
+- name: Set hostname
+  hostname:
+    name: '{{ inventory_hostname }}'
+
 - name: Create kenyon account
   user:
     name: kenyon
