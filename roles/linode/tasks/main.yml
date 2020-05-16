@@ -1,6 +1,11 @@
 ---
 # Tasks for setup of a Debian 10 Linode.
 
+- name: Create /etc/resolv.conf
+  template:
+    src: etc/resolv.conf.j2
+    dest: /etc/resolv.conf
+
 - name: Remove some packages
   when: ansible_facts.os_family == 'Debian'
   apt:
