@@ -1,7 +1,7 @@
 ---
 # Tasks for setup of a Debian 10 Linode.
 
-- name: Create /etc/resolv.conf
+- name: Install my /etc/resolv.conf
   template:
     src: etc/resolv.conf.j2
     dest: /etc/resolv.conf
