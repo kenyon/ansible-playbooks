@@ -19,7 +19,6 @@
       - hdparm
       - installation-report
       - iotop
-      - isc-dhcp*
       - kbd
       - laptop-detect
       - linux-image-amd64
