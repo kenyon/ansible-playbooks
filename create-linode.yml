@@ -30,6 +30,7 @@
       set_fact:
         linode_disk: '{{ (linode_create.stdout | from_json | first).specs.disk }}'
         linode_id: '{{ (linode_create.stdout | from_json | first).id }}'
+        linode_ipv6: '{{ (linode_create.stdout | from_json | first).ipv6 }}'
 
     - name: Create system disk for {{ linode_label }}
       command: >-
@@ -62,7 +63,7 @@
         --devices.sda.disk_id {{ (system_disk.stdout | from_json | first).id }}
         --devices.sdb.disk_id {{ (swap_disk.stdout | from_json | first).id }}
         --helpers.updatedb_disabled false
-        --helpers.network true
+        --helpers.network false
       register: config_profile
       retries: '{{ retry_count }}'
       delay: '{{ delay_seconds }}'
@@ -70,5 +71,9 @@
 
     - name: Boot {{ linode_label }}
       command: linode-cli linodes boot {{ linode_id }}
+
+    - name: Show IPv6 address
+      debug:
+        msg: '{{ linode_label }} address: {{ linode_ipv6 }}'
 
 ...
