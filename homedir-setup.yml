@@ -71,7 +71,6 @@
         - .devscripts
         - .dput.cf
         - .emacs.d
-        - .gitconfig
         - .inputrc
         - .profile
         - .quiltrc
