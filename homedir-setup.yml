@@ -6,14 +6,6 @@
 
 - hosts: all
   tasks:
-    - name: Update ssh_known_hosts
-      become: yes
-      known_hosts:
-        path: /etc/ssh/ssh_known_hosts
-        name: '{{ item.names[0] }}'
-        key: '{{ item.names|join(",") }} {{ item.key }}'
-      loop: '{{ ssh_known_hosts }}'
-
     - name: Ensure git is installed
       become: '{{ "yes" if ansible_facts.os_family != "Darwin" }}' # homebrew shall not run as root
       package:
