@@ -31,7 +31,6 @@
     executable: /opt/puppetlabs/bin/puppetserver gem
   loop:
     - r10k
-    - hiera-eyaml
 
 - name: Create r10k config directory
   file:
