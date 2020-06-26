@@ -16,3 +16,6 @@ puppet
 
 [puppetserver]
 puppet
+
+[vultr]
+alpha
