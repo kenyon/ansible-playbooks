@@ -8,11 +8,13 @@
 - hosts: all,!macos,!localhost
   tasks:
     - include_role:
-        name: '{{ item }}'
-      when: item in group_names
+        name: '{{ grp }}'
+      when: grp in group_names
       loop:
         - linode
         - vultr
+      loop_control:
+        loop_var: grp
     - import_role:
         name: common
     - import_role:
