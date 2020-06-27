@@ -7,6 +7,11 @@
     creates: /swap
   register: create_swap
 
+- name: Set swap file permissions
+  file:
+    path: /swap
+    mode: 0600
+
 - name: Set up swap file
   command: mkswap /swap
   when: create_swap is changed
