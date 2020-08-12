@@ -34,6 +34,14 @@
     regexp: 'iface [\w]+ inet '
     state: absent
 
+# I want to use DNS for FQDN hostname resolution,
+# so remove the 127.0.1.1 entry from /etc/hosts.
+- name: Configure /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: 127\.0\.1\.1
+    state: absent
+
 - name: Configure /etc/resolv.conf
   lineinfile:
     path: /etc/resolv.conf
