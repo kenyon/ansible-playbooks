@@ -39,7 +39,7 @@
     path: /etc/resolv.conf
     line: '{{ item }}'
   loop:
-    - domain kenyonralph.com
+    - search kenyonralph.com
     - options edns0
 
 - name: Remove some packages
