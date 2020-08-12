@@ -50,6 +50,15 @@
     - search kenyonralph.com
     - options edns0
 
+- name: Remove settings Vultr added (I think)
+  sysctl:
+    name: '{{ item }}'
+    state: absent
+  loop:
+    - net.core.default_qdisc
+    - net.ipv4.tcp_congestion_control
+    - net.ipv6.conf.all.accept_ra
+
 - name: Remove some packages
   when: ansible_facts.os_family == 'Debian'
   apt:
