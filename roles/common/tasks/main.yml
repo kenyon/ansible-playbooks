@@ -45,7 +45,6 @@
     name:
       - aptitude
       - etckeeper
-      - python-apt
       - python3-apt
       - wget
 
