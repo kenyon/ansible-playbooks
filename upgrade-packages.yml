@@ -1,24 +1,25 @@
 ---
 # ansible playbook to upgrade packages.
 
-# ansible-playbook --forks 10 --vault-id ~/.ansible/vault-password --become --verbose --check ~/git/ansible-kenyon/upgrade-packages.yml
+# ansible-playbook --vault-id ~/.ansible_vault_password --verbose upgrade-packages.yml
 
-# To actually do the upgrade, not just download:
-# ansible-playbook --forks 10 --vault-id ~/.ansible/vault-password --become --verbose ~/git/ansible-kenyon/upgrade-packages.yml
-
-- hosts: all:!laptops
+- hosts: all,!laptops,!localhost
   tasks:
 
   - name: Upgrade packages (rpm)
+    become: yes
     when: ansible_os_family|lower == 'redhat'
-    package:
+    ansible.builtin.package:
       update_cache: yes
       name: '*'
       state: latest
 
   - name: Upgrade packages (deb)
+    become: yes
+    environment:
+      APT_LISTBUGS_FRONTEND: none
     when: ansible_os_family|lower == 'debian'
-    package:
+    ansible.builtin.package:
       update_cache: yes
       upgrade: full
 
