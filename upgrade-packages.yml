@@ -7,7 +7,6 @@
 # ansible-playbook --forks 10 --vault-id ~/.ansible/vault-password --become --verbose ~/git/ansible-kenyon/upgrade-packages.yml
 
 - hosts: all:!laptops
-  strategy: free
   tasks:
 
   - name: Upgrade packages (rpm)
