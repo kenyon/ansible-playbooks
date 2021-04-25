@@ -12,6 +12,9 @@
           - gnupg
           - keychain
           - pinentry-mac
+          - vim
+          - zsh-autosuggestions
+          - zsh-completions
           - zsh-syntax-highlighting
         state: latest
 
