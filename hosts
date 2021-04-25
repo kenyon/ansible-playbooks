@@ -2,14 +2,14 @@
 
 # My ansible inventory.
 
-localhost ansible_python_interpreter=/usr/bin/python3
+localhost ansible_connection=local
 
 [nameserver]
 hydrogen
 darwin
 
 [macos]
-iMac.local
+iMac.local ansible_connection=local
 
 [linode]
 darwin
