@@ -76,3 +76,9 @@
         repo: git@github.com:jamessan/vim-gnupg.git
         dest: '{{ ansible_user_dir }}/.vim/pack/gnupg/start/vim-gnupg'
         update: yes
+
+    - name: Set secure directory permissions to allow zsh to load completions
+      ansible.builtin.file:
+        path: /usr/local/share
+        recurse: yes
+        mode: go-w
