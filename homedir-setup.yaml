@@ -18,23 +18,15 @@
           - zsh-syntax-highlighting
         state: latest
 
-    - name: Clone or update sysadmin repo
+    - name: Clone or update repos
       ansible.builtin.git:
-        repo: git@gitlab.com:kenyon/sysadmin.git
-        dest: '{{ ansible_user_dir }}/git/sysadmin'
+        repo: git@gitlab.com:kenyon/{{ item }}.git
+        dest: '{{ ansible_user_dir }}/git/{{ item }}'
         update: yes
-
-    - name: Clone or update dotfiles repo
-      ansible.builtin.git:
-        repo: git@gitlab.com:kenyon/dotfiles.git
-        dest: '{{ ansible_user_dir }}/git/dotfiles'
-        update: yes
-
-    - name: Clone or update scripts repo
-      ansible.builtin.git:
-        repo: git@gitlab.com:kenyon/scripts.git
-        dest: '{{ ansible_user_dir }}/git/scripts'
-        update: yes
+      loop:
+        - sysadmin
+        - dotfiles
+        - scripts
 
     - name: Create ~/.ssh
       ansible.builtin.file:
