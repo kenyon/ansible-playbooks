@@ -41,14 +41,6 @@
         path: '{{ ansible_user_dir }}/{{ item }}'
       loop:
         - .config/git
-        - .emacs.d
-        - .vim/pack/gnupg/start
-
-    - name: Clone or update vim-gnupg
-      ansible.builtin.git:
-        repo: git@github.com:jamessan/vim-gnupg.git
-        dest: '{{ ansible_user_dir }}/.vim/pack/gnupg/start/vim-gnupg'
-        update: yes
 
     - name: Create symlinks to dotfiles
       ansible.builtin.file:
@@ -72,3 +64,15 @@
         - .zlogin
         - .zshenv
         - .zshrc
+
+    - name: Create vim-gnupg directories
+      ansible.builtin.file:
+        state: directory
+        recurse: yes
+        path: '{{ ansible_user_dir }}/.vim/pack/gnupg/start'
+
+    - name: Clone or update vim-gnupg
+      ansible.builtin.git:
+        repo: git@github.com:jamessan/vim-gnupg.git
+        dest: '{{ ansible_user_dir }}/.vim/pack/gnupg/start/vim-gnupg'
+        update: yes
