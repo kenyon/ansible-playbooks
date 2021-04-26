@@ -9,6 +9,7 @@
   user:
     name: kenyon
     groups:
+      - adm
       - sudo
     append: yes
 
