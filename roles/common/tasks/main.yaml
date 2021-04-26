@@ -21,7 +21,7 @@
 - name: Set my authorized SSH key
   authorized_key:
     user: kenyon
-    key: "{{ lookup('file', '/home/kenyon/.ssh/id_ed25519.pub') }}"
+    key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
 
 - name: Lock root password
   user:
