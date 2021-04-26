@@ -34,7 +34,6 @@
     name:
       - exim4*
       - nano
-      - resolvconf
     state: absent
     purge: yes
 
@@ -47,5 +46,3 @@
       - etckeeper
       - python3-apt
       - wget
-
-...
