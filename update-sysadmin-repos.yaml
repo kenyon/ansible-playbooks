@@ -1,0 +1,5 @@
+---
+- hosts: all,!localhost
+  tasks:
+    - ansible.builtin.import_tasks: tasks/ensure-git-dir.yaml
+    - ansible.builtin.import_tasks: tasks/update-sysadmin-repos.yaml
