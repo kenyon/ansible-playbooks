@@ -2,7 +2,7 @@
 # Ansible playbook to set up or update my home directory and related stuff on macOS.
 # On Linux this is done with Puppet.
 
-- hosts: macos
+- hosts: all
   tasks:
     - name: Install packages
       ansible.builtin.package:
@@ -17,6 +17,7 @@
           - zsh-completions
           - zsh-syntax-highlighting
         state: latest
+      when: ansible_facts.os_family == 'Darwin'
 
     - name: Clone or update repos
       ansible.builtin.git:
@@ -28,11 +29,14 @@
         - dotfiles
         - scripts
 
-    - name: Create ~/.ssh
+    - name: Create ~/.ssh and ~/.gnupg
       ansible.builtin.file:
         state: directory
         mode: '0700'
-        path: '{{ ansible_user_dir }}/.ssh'
+        path: '{{ ansible_user_dir }}/{{ item }}'
+      loop:
+        - .gnupg
+        - .ssh
 
     - name: Create other directories
       ansible.builtin.file:
@@ -64,6 +68,17 @@
         - .zlogin
         - .zshenv
         - .zshrc
+      when: ansible_facts.os_family == 'Darwin'
+
+    - name: Create symlinks to more dotfiles
+      ansible.builtin.file:
+        state: link
+        force: yes
+        path: '{{ ansible_user_dir }}/{{ item }}'
+        src: '{{ ansible_user_dir }}/git/sysadmin/dotfiles/{{ item }}'
+      loop:
+        - .gnupg/gpg-agent.conf
+        - .gnupg/gpg.conf
 
     - name: Create vim-gnupg directories
       ansible.builtin.file:
@@ -82,3 +97,4 @@
         path: /usr/local/share
         recurse: yes
         mode: go-w
+      when: ansible_facts.os_family == 'Darwin'
