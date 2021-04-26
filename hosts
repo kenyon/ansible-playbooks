@@ -2,6 +2,7 @@
 
 # My ansible inventory.
 
+lithium
 localhost ansible_connection=local
 
 [nameserver]
