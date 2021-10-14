@@ -13,10 +13,8 @@ iMac.local ansible_connection=local
 
 [linode]
 darwin
-puppet
 
 [puppetserver]
-puppet
 lithium
 
 [vultr]
