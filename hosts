@@ -12,6 +12,7 @@ darwin
 iMac.local ansible_connection=local
 
 [linode]
+beta
 darwin
 
 [puppetserver]
