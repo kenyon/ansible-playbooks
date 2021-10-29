@@ -19,14 +19,16 @@
         state: latest
       when: ansible_facts.os_family == 'Darwin'
 
-    - ansible.builtin.import_tasks: tasks/ensure-git-dir.yaml
-    - ansible.builtin.import_tasks: tasks/update-sysadmin-repos.yaml
+    - name: Create my git repo directory
+      ansible.builtin.import_tasks: tasks/ensure-git-dir.yaml
+    - name: Update my git repos
+      ansible.builtin.import_tasks: tasks/update-sysadmin-repos.yaml
 
     - name: Create ~/.ssh and ~/.gnupg
       ansible.builtin.file:
         state: directory
-        mode: '0700'
-        path: '{{ ansible_user_dir }}/{{ item }}'
+        mode: "0700"
+        path: "{{ ansible_user_dir }}/{{ item }}"
       loop:
         - .gnupg
         - .ssh
@@ -35,7 +37,7 @@
       ansible.builtin.file:
         state: directory
         recurse: yes
-        path: '{{ ansible_user_dir }}/{{ item }}'
+        path: "{{ ansible_user_dir }}/{{ item }}"
       loop:
         - .config/git
 
@@ -43,8 +45,8 @@
       ansible.builtin.file:
         state: link
         force: yes
-        path: '{{ ansible_user_dir }}/{{ item }}'
-        src: '{{ ansible_user_dir }}/git/dotfiles/{{ item }}'
+        path: "{{ ansible_user_dir }}/{{ item }}"
+        src: "{{ ansible_user_dir }}/git/dotfiles/{{ item }}"
       loop:
         - .aspell.en.prepl
         - .aspell.en.pws
@@ -67,8 +69,8 @@
       ansible.builtin.file:
         state: link
         force: yes
-        path: '{{ ansible_user_dir }}/{{ item }}'
-        src: '{{ ansible_user_dir }}/git/sysadmin/dotfiles/{{ item }}'
+        path: "{{ ansible_user_dir }}/{{ item }}"
+        src: "{{ ansible_user_dir }}/git/sysadmin/dotfiles/{{ item }}"
       loop:
         - .gnupg/gpg-agent.conf
         - .gnupg/gpg.conf
@@ -77,12 +79,12 @@
       ansible.builtin.file:
         state: directory
         recurse: yes
-        path: '{{ ansible_user_dir }}/.vim/pack/gnupg/start'
+        path: "{{ ansible_user_dir }}/.vim/pack/gnupg/start"
 
     - name: Clone or update vim-gnupg
       ansible.builtin.git:
         repo: git@github.com:jamessan/vim-gnupg.git
-        dest: '{{ ansible_user_dir }}/.vim/pack/gnupg/start/vim-gnupg'
+        dest: "{{ ansible_user_dir }}/.vim/pack/gnupg/start/vim-gnupg"
         update: yes
 
     - name: Set secure directory permissions to allow zsh to load completions

@@ -1,7 +1,7 @@
 - name: Clone or update repos
   ansible.builtin.git:
     repo: git@gitlab.com:kenyon/{{ item }}.git
-    dest: '{{ ansible_user_dir }}/git/{{ item }}'
+    dest: "{{ ansible_user_dir }}/git/{{ item }}"
     update: yes
   loop:
     - dotfiles

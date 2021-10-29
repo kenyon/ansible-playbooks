@@ -2,26 +2,26 @@
 # Tasks for a brand new Debian 10 IPv6-only Vultr VM.
 
 - name: Create swap file
-  command:
+  ansible.builtin.command:
     cmd: dd if=/dev/zero of=/swap bs=1M count=1024
     creates: /swap
   register: create_swap
 
 - name: Set swap file permissions
-  file:
+  ansible.builtin.file:
     path: /swap
     mode: 0600
 
 - name: Set up swap file
-  command: mkswap /swap
+  ansible.builtin.command: mkswap /swap
   when: create_swap is changed
 
 - name: Activate swap file
-  command: swapon /swap
+  ansible.builtin.command: swapon /swap
   when: create_swap is changed
 
 - name: Ensure swap file is in /etc/fstab
-  mount:
+  ansible.posix.mount:
     src: /swap
     path: none
     fstype: swap
@@ -29,7 +29,7 @@
     state: present
 
 - name: Remove legacy IP configuration
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/network/interfaces
     regexp: 'iface [\w]+ inet '
     state: absent
@@ -37,22 +37,22 @@
 # I want to use DNS for FQDN hostname resolution,
 # so remove the 127.0.1.1 entry from /etc/hosts.
 - name: Configure /etc/hosts
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/hosts
     regexp: 127\.0\.1\.1
     state: absent
 
 - name: Configure /etc/resolv.conf
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/resolv.conf
-    line: '{{ item }}'
+    line: "{{ item }}"
   loop:
     - search kenyonralph.com
     - options edns0
 
 - name: Remove settings Vultr added (I think)
-  sysctl:
-    name: '{{ item }}'
+  ansible.posix.sysctl:
+    name: "{{ item }}"
     state: absent
   loop:
     - net.core.default_qdisc
@@ -61,12 +61,10 @@
 
 - name: Remove some packages
   when: ansible_facts.os_family == 'Debian'
-  apt:
+  ansible.builtin.apt:
     name:
       - mdadm
       - rdnssd
       - rsyslog
     state: absent
     purge: yes
-
-...

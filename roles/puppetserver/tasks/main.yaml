@@ -2,22 +2,22 @@
 # Ansible role to build a Puppet server.
 
 - name: Install puppetserver and ruby
-  package:
+  ansible.builtin.package:
     name:
       - puppetserver
       - ruby
-    state: latest
+    state: present
 
 - name: Configure puppetserver for lower memory usage
-  replace:
+  ansible.builtin.replace:
     path: /etc/default/puppetserver
-    regexp: '{{ item }}'
+    regexp: "{{ item }}"
   loop:
     - -Xms([\d]+[kKmMgG]?)
     - -Xmx([\d]+[kKmMgG]?)
 
 - name: Install gems
-  gem:
+  community.general.gem:
     name: "{{ item }}"
     user_install: no
   loop:
@@ -25,7 +25,7 @@
     - hiera-eyaml
 
 - name: Install puppetserver gems
-  gem:
+  community.general.gem:
     name: "{{ item }}"
     user_install: no
     executable: /opt/puppetlabs/bin/puppetserver gem
@@ -33,28 +33,28 @@
     - r10k
 
 - name: Create r10k config directory
-  file:
+  ansible.builtin.file:
     state: directory
     path: /etc/puppetlabs/r10k
+    mode: 0755
 
 - name: Create initial r10k config
-  template:
+  ansible.builtin.template:
     src: etc/puppetlabs/r10k/r10k.yaml.j2
     dest: /etc/puppetlabs/r10k/r10k.yaml
+    mode: 0644
 
 - name: Deploy Puppet environment
-  command: r10k deploy environment --verbose --puppetfile
+  ansible.builtin.command: r10k deploy environment --verbose --puppetfile
 
 - name: Enable and start puppetserver
-  service:
+  ansible.builtin.service:
     name: puppetserver
     enabled: yes
     state: started
 
 - name: Enable and start puppet agent
-  service:
+  ansible.builtin.service:
     name: puppet
     enabled: yes
     state: started
-
-...

@@ -17,9 +17,8 @@
       prompt: New Linode label
       private: no
   tasks:
-
     - name: Create Linode {{ linode_label }}
-      command: >-
+      ansible.builtin.command: >-
         linode-cli --json --no-defaults linodes create
         --label {{ linode_label }}
         --type {{ linode_type }}
@@ -27,13 +26,13 @@
       register: linode_create
 
     - name: Set facts of new Linode
-      set_fact:
-        linode_disk: '{{ (linode_create.stdout | from_json | first).specs.disk }}'
-        linode_id: '{{ (linode_create.stdout | from_json | first).id }}'
-        linode_ipv6: '{{ (linode_create.stdout | from_json | first).ipv6 }}'
+      ansible.builtin.set_fact:
+        linode_disk: "{{ (linode_create.stdout | from_json | first).specs.disk }}"
+        linode_id: "{{ (linode_create.stdout | from_json | first).id }}"
+        linode_ipv6: "{{ (linode_create.stdout | from_json | first).ipv6 }}"
 
     - name: Create system disk for {{ linode_label }}
-      command: >-
+      ansible.builtin.command: >-
         linode-cli --json --no-defaults linodes disk-create {{ linode_id }}
         --label system
         --size {{ linode_disk | int - swap_size }}
@@ -41,23 +40,23 @@
         --authorized_users {{ my_username }}
         --root_pass {{ lookup("password", "/dev/null") | quote }}
       register: system_disk
-      retries: '{{ retry_count }}'
-      delay: '{{ delay_seconds }}'
+      retries: "{{ retry_count }}"
+      delay: "{{ delay_seconds }}"
       until: system_disk is not failed
 
     - name: Create swap disk for {{ linode_label }}
-      command: >-
+      ansible.builtin.command: >-
         linode-cli --json --no-defaults linodes disk-create {{ linode_id }}
         --label swap
         --size {{ swap_size }}
         --filesystem swap
       register: swap_disk
-      retries: '{{ retry_count }}'
-      delay: '{{ delay_seconds }}'
+      retries: "{{ retry_count }}"
+      delay: "{{ delay_seconds }}"
       until: swap_disk is not failed
 
     - name: Create configuration profile for {{ linode_label }}
-      command: >-
+      ansible.builtin.command: >-
         linode-cli --json --no-defaults linodes config-create {{ linode_id }}
         --label config
         --devices.sda.disk_id {{ (system_disk.stdout | from_json | first).id }}
@@ -65,15 +64,13 @@
         --helpers.updatedb_disabled false
         --helpers.network false
       register: config_profile
-      retries: '{{ retry_count }}'
-      delay: '{{ delay_seconds }}'
+      retries: "{{ retry_count }}"
+      delay: "{{ delay_seconds }}"
       until: config_profile is not failed
 
     - name: Boot {{ linode_label }}
-      command: linode-cli linodes boot {{ linode_id }}
+      ansible.builtin.command: linode-cli linodes boot {{ linode_id }}
 
     - name: Show IPv6 address
-      debug:
-        msg: '{{ linode_label }} address: {{ linode_ipv6 }}'
-
-...
+      ansible.builtin.debug:
+        msg: "{{ linode_label }} address: {{ linode_ipv6 }}"

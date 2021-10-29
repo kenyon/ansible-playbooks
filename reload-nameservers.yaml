@@ -1,5 +1,4 @@
 ---
-
 - hosts: nameserver
   tasks:
     - name: Reload named

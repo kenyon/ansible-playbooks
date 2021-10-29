@@ -4,18 +4,18 @@
 
 - name: Enable the Puppet platform repository
   when: ansible_facts.os_family == 'Debian'
-  apt:
+  ansible.builtin.apt:
     deb: https://apt.puppet.com/puppet-release-{{ ansible_facts.distribution_release }}.deb
   ignore_errors: true
 
 - name: Install puppet-agent
-  package:
+  ansible.builtin.package:
     name: puppet-agent
-    state: latest
+    state: present
     update_cache: yes
 
 - name: Enable and start puppet agent
-  service:
+  ansible.builtin.service:
     name: puppet
     enabled: yes
     state: started

@@ -6,13 +6,11 @@
     - name: Remove obsolete Debian files
       become: yes
       when: ansible_os_family | lower == 'debian'
-      file:
+      ansible.builtin.file:
         state: absent
-        path: '{{ item }}'
+        path: "{{ item }}"
       loop:
         # These were obsoleted when I switched to the voxpupuli unattended_upgrades puppet
         # module.
         - /etc/apt/apt.conf.d/50unattended_upgrade_settings
         - /etc/apt/apt.conf.d/50periodic_update
-
-...

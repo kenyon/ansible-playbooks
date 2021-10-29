@@ -1,5 +1,8 @@
 ---
 - hosts: all,!localhost
   tasks:
-    - ansible.builtin.import_tasks: tasks/ensure-git-dir.yaml
-    - ansible.builtin.import_tasks: tasks/update-sysadmin-repos.yaml
+    - name: Create git directory
+      ansible.builtin.import_tasks: tasks/ensure-git-dir.yaml
+
+    - name: Update git repos
+      ansible.builtin.import_tasks: tasks/update-sysadmin-repos.yaml

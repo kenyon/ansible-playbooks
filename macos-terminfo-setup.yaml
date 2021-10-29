@@ -1,5 +1,4 @@
 ---
-
 # The terminfo that comes with macOS is too old, and doesn't contain
 # tmux-256color. So sshing to macOS from my Linux machine which uses
 # tmux-256color results in a useless terminal. This playbook ensures
@@ -10,26 +9,32 @@
 - hosts: macos
   tasks:
     - name: Ensure ~/.terminfo directory exists
-      file:
+      ansible.builtin.file:
         path: "{{ ansible_user_dir }}/.terminfo"
         state: directory
+        mode: 0755
+
     - name: Ensure ncurses is installed from brew
-      homebrew:
+      community.general.homebrew:
         name: ncurses
         state: latest
+
     - name: Get ncurses installation location
-      command: brew --prefix ncurses
+      ansible.builtin.command: brew --prefix ncurses
       register: brew_prefix_ncurses
+      changed_when: false
+
     - name: Create temporary file to store terminfo source
-      tempfile:
+      ansible.builtin.tempfile:
       register: tempfile
+
     - name: Decompile terminfo
-      shell: "{{ brew_prefix_ncurses.stdout }}/bin/infocmp tmux-256color > {{ tempfile.path }}"
+      ansible.builtin.shell: "{{ brew_prefix_ncurses.stdout }}/bin/infocmp tmux-256color > {{ tempfile.path }}"
+
     - name: Compile terminfo with system tic
-      command: tic -s {{ tempfile.path }}
+      ansible.builtin.command: tic -s {{ tempfile.path }}
+
     - name: Remove temporary file
-      file:
+      ansible.builtin.file:
         state: absent
         path: "{{ tempfile.path }}"
-
-...

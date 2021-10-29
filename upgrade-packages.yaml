@@ -5,22 +5,19 @@
 
 - hosts: all,!laptops,!localhost
   tasks:
+    - name: Upgrade packages (rpm)
+      become: yes
+      when: ansible_os_family|lower == 'redhat'
+      ansible.builtin.package:
+        update_cache: yes
+        name: "*"
+        state: latest
 
-  - name: Upgrade packages (rpm)
-    become: yes
-    when: ansible_os_family|lower == 'redhat'
-    ansible.builtin.package:
-      update_cache: yes
-      name: '*'
-      state: latest
-
-  - name: Upgrade packages (deb)
-    become: yes
-    environment:
-      APT_LISTBUGS_FRONTEND: none
-    when: ansible_os_family|lower == 'debian'
-    ansible.builtin.package:
-      update_cache: yes
-      upgrade: full
-
-...
+    - name: Upgrade packages (deb)
+      become: yes
+      environment:
+        APT_LISTBUGS_FRONTEND: none
+      when: ansible_os_family|lower == 'debian'
+      ansible.builtin.package:
+        update_cache: yes
+        upgrade: full

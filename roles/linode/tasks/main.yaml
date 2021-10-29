@@ -2,13 +2,14 @@
 # Tasks for setup of a Debian 10 Linode.
 
 - name: Install my /etc/resolv.conf
-  template:
-    src: etc/resolv.conf.j2
+  ansible.builtin.copy:
+    src: etc/resolv.conf
     dest: /etc/resolv.conf
+    mode: 0644
 
 - name: Remove some packages
   when: ansible_facts.os_family == 'Debian'
-  apt:
+  ansible.builtin.apt:
     name:
       - debian-faq
       - discover
@@ -29,5 +30,3 @@
       - telnet
     state: absent
     purge: yes
-
-...
