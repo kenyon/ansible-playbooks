@@ -8,7 +8,7 @@
     my_username: kenyon
     swap_size: 2048
     region: us-west
-    image: linode/debian10
+    image: linode/debian11
     linode_type: g6-nanode-1
     retry_count: 10
     delay_seconds: 5
