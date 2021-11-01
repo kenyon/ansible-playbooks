@@ -14,6 +14,14 @@
     state: present
     update_cache: yes
 
+- name: Configure puppet agent
+  community.general.ini_file:
+    path: /etc/puppetlabs/puppet/puppet.conf
+    section: main
+    option: server
+    value: "{{ puppet_server }}"
+    mode: 0644
+
 - name: Enable and start puppet agent
   ansible.builtin.service:
     name: puppet
