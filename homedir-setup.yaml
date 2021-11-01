@@ -1,6 +1,5 @@
 ---
-# Ansible playbook to set up or update my home directory and related stuff on macOS.
-# On Linux this is done with Puppet.
+# Ansible playbook to set up or update my home directory and related stuff.
 
 - hosts: all
   tasks:
