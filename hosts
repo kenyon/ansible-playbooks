@@ -4,19 +4,13 @@
 
 localhost ansible_connection=local
 
-[nameserver]
 hydrogen
-darwin
 
 [macos]
 iMac.local ansible_connection=local
 
 [linode]
 beta
-darwin
 
 [puppetserver]
 lithium
-
-[vultr]
-alpha
