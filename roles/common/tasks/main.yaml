@@ -46,4 +46,4 @@
       - aptitude
       - etckeeper
       - python3-apt
-      - wget
+      - wget2
