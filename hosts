@@ -5,6 +5,7 @@
 localhost ansible_connection=local
 
 hydrogen
+router
 
 [macos]
 iMac.local ansible_connection=local
