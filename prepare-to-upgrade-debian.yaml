@@ -37,7 +37,7 @@
         - name: Done
           ansible.builtin.debug:
             msg:
-              - "Now, the manual upgrade process: apt-get upgrade; apt full-upgrade"
+              - "Now, the manual upgrade process: apt upgrade --without-new-pkgs; apt full-upgrade"
               - "Reference: https://www.debian.org/releases/{{ new_release }}/amd64/release-notes/ch-upgrading.en.html"
       when:
         - ansible_facts['distribution'] == 'Debian'
