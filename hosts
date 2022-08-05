@@ -2,16 +2,14 @@
 
 # My ansible inventory.
 
-localhost ansible_connection=local
-
-hydrogen
-router
+hydrogen.local
+router.local
 
 [macos]
 iMac.local ansible_connection=local
 
 [linode]
-beta
+beta.kenyonralph.com
 
 [puppetserver]
-lithium
+lithium.local
