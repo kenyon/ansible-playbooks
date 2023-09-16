@@ -1,7 +1,8 @@
 ---
 # Ansible playbook to set up or update my home directory and related stuff.
 
-- hosts: all
+- name: Homedir setup
+  hosts: all
   tasks:
     - name: Install packages
       ansible.builtin.package:
@@ -15,7 +16,7 @@
           - zsh-autosuggestions
           - zsh-completions
           - zsh-syntax-highlighting
-        state: latest
+        state: installed
       when: ansible_facts.os_family == 'Darwin'
 
     - name: Create my git repo directory
@@ -35,7 +36,7 @@
     - name: Create other directories
       ansible.builtin.file:
         state: directory
-        recurse: yes
+        recurse: true
         path: "{{ ansible_user_dir }}/{{ item }}"
       loop:
         - .config/git
@@ -43,7 +44,7 @@
     - name: Create symlinks to dotfiles
       ansible.builtin.file:
         state: link
-        force: yes
+        force: true
         path: "{{ ansible_user_dir }}/{{ item }}"
         src: "{{ ansible_user_dir }}/git/dotfiles/{{ item }}"
       loop:
@@ -67,7 +68,7 @@
     - name: Create symlinks to more dotfiles
       ansible.builtin.file:
         state: link
-        force: yes
+        force: true
         path: "{{ ansible_user_dir }}/{{ item }}"
         src: "{{ ansible_user_dir }}/git/sysadmin/dotfiles/{{ item }}"
       loop:
@@ -77,18 +78,18 @@
     - name: Create vim-gnupg directories
       ansible.builtin.file:
         state: directory
-        recurse: yes
+        recurse: true
         path: "{{ ansible_user_dir }}/.vim/pack/gnupg/start"
 
-    - name: Clone or update vim-gnupg
+    - name: Clone or update vim-gnupg # noqa: latest
       ansible.builtin.git:
         repo: git@github.com:jamessan/vim-gnupg.git
         dest: "{{ ansible_user_dir }}/.vim/pack/gnupg/start/vim-gnupg"
-        update: yes
+        update: true
 
     - name: Set secure directory permissions to allow zsh to load completions
       ansible.builtin.file:
         path: /usr/local/share
-        recurse: yes
+        recurse: true
         mode: go-w
       when: ansible_facts.os_family == 'Darwin'
