@@ -11,7 +11,7 @@
     groups:
       - adm
       - sudo
-    append: yes
+    append: true
 
 - name: Configure my sudo privileges
   ansible.builtin.lineinfile:
@@ -27,7 +27,7 @@
 - name: Lock root password
   ansible.builtin.user:
     name: root
-    password_lock: yes
+    password_lock: true
 
 - name: Remove some packages
   when: ansible_facts.os_family == 'Debian'
@@ -36,12 +36,12 @@
       - exim4*
       - nano
     state: absent
-    purge: yes
+    purge: true
 
 - name: Install some packages
   when: ansible_facts.os_family == 'Debian'
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     name:
       - aptitude
       - etckeeper
