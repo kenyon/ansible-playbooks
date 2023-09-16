@@ -2,4 +2,4 @@
   ansible.builtin.file:
     state: directory
     path: "{{ ansible_user_dir }}/git"
-    mode: 0755
+    mode: "0755"

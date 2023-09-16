@@ -3,21 +3,22 @@
 
 # ansible-playbook --vault-id ~/.ansible_vault_password --verbose upgrade-packages.yml
 
-- hosts: all,!laptops,!localhost
+- name: Upgrade packages
+  hosts: all,!laptops,!localhost
   tasks:
-    - name: Upgrade packages (rpm)
-      become: yes
-      when: ansible_os_family|lower == 'redhat'
+    - name: Upgrade packages (rpm) # noqa: package-latest
+      become: true
+      when: ansible_os_family | lower == 'redhat'
       ansible.builtin.package:
-        update_cache: yes
+        update_cache: true
         name: "*"
         state: latest
 
     - name: Upgrade packages (deb)
-      become: yes
+      become: true
       environment:
         APT_LISTBUGS_FRONTEND: none
-      when: ansible_os_family|lower == 'debian'
+      when: ansible_os_family | lower == 'debian'
       ansible.builtin.package:
-        update_cache: yes
+        update_cache: true
         upgrade: full

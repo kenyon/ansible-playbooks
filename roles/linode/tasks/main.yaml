@@ -5,7 +5,7 @@
   ansible.builtin.copy:
     src: etc/resolv.conf
     dest: /etc/resolv.conf
-    mode: 0644
+    mode: "0644"
 
 - name: Remove some packages
   when: ansible_facts.os_family == 'Debian'
@@ -29,4 +29,4 @@
       - sysstat
       - telnet
     state: absent
-    purge: yes
+    purge: true

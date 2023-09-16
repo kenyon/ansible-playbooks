@@ -19,7 +19,7 @@
 - name: Install gems
   community.general.gem:
     name: "{{ item }}"
-    user_install: no
+    user_install: false
   loop:
     - r10k
     - hiera-eyaml
@@ -27,7 +27,7 @@
 - name: Install puppetserver gems
   community.general.gem:
     name: "{{ item }}"
-    user_install: no
+    user_install: false
     executable: /opt/puppetlabs/bin/puppetserver gem
   loop:
     - r10k
@@ -36,25 +36,26 @@
   ansible.builtin.file:
     state: directory
     path: /etc/puppetlabs/r10k
-    mode: 0755
+    mode: "0755"
 
 - name: Create initial r10k config
   ansible.builtin.template:
     src: etc/puppetlabs/r10k/r10k.yaml.j2
     dest: /etc/puppetlabs/r10k/r10k.yaml
-    mode: 0644
+    mode: "0644"
 
 - name: Deploy Puppet environment
   ansible.builtin.command: r10k deploy environment --verbose --puppetfile
+  changed_when: true
 
 - name: Enable and start puppetserver
   ansible.builtin.service:
     name: puppetserver
-    enabled: yes
+    enabled: true
     state: started
 
 - name: Enable and start puppet agent
   ansible.builtin.service:
     name: puppet
-    enabled: yes
+    enabled: true
     state: started

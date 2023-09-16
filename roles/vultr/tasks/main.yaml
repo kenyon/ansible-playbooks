@@ -10,15 +10,15 @@
 - name: Set swap file permissions
   ansible.builtin.file:
     path: /swap
-    mode: 0600
+    mode: "0600"
 
 - name: Set up swap file
   ansible.builtin.command: mkswap /swap
-  when: create_swap is changed
+  changed_when: true
 
 - name: Activate swap file
   ansible.builtin.command: swapon /swap
-  when: create_swap is changed
+  changed_when: true
 
 - name: Ensure swap file is in /etc/fstab
   ansible.posix.mount:
@@ -67,4 +67,4 @@
       - rdnssd
       - rsyslog
     state: absent
-    purge: yes
+    purge: true

@@ -11,7 +11,7 @@
   ansible.builtin.package:
     name: puppet-agent
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Configure puppet agent
   community.general.ini_file:
@@ -19,10 +19,10 @@
     section: main
     option: server
     value: "{{ puppet_server }}"
-    mode: 0644
+    mode: "0644"
 
 - name: Enable and start puppet agent
   ansible.builtin.service:
     name: puppet
-    enabled: yes
+    enabled: true
     state: started

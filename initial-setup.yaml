@@ -5,7 +5,8 @@
 
 # For initial setup of a Linode or Vultr VM, use --user root.
 
-- hosts: all,!macos,!localhost
+- name: Initial setup
+  hosts: all,!macos,!localhost
   tasks:
     - name: Import VPS provider role
       ansible.builtin.include_role:
@@ -23,7 +24,7 @@
 
     - name: Import puppet-agent role
       ansible.builtin.import_role:
-        name: puppet-agent
+        name: puppet_agent
 
     - name: Import puppetserver role
       ansible.builtin.import_role:

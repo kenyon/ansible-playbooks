@@ -3,22 +3,27 @@
 # This doesn't actually do the upgrade because I want to do that
 # manually to manually update config files, etc.
 
-- hosts: all
-  become: yes
+- name: Prepare to upgrade Debian
+  hosts: all
+  become: true
   vars:
     old_release: buster
     new_release: bullseye
   tasks:
-    - block:
-        - name: Disable puppet agent
+    - name: Prepare to upgrade Debian
+      when:
+        - ansible_facts['distribution'] == 'Debian'
+        - ansible_facts['distribution_release'] == old_release
+      block:
+        - name: Disable puppet agent # noqa: no-changed-when ignore-errors
           ansible.builtin.command: puppet agent --disable
           # Continue even if puppet isn't installed.
-          ignore_errors: yes
+          ignore_errors: true
 
         - name: Find sources files
           ansible.builtin.find:
             paths: /etc/apt
-            recurse: yes
+            recurse: true
             patterns: "*.list"
           register: sources
 
@@ -31,17 +36,14 @@
 
         - name: Update package cache
           ansible.builtin.apt:
-            update_cache: yes
-            autoclean: yes
+            update_cache: true
+            autoclean: true
 
         - name: Done
           ansible.builtin.debug:
             msg:
               - "Now, the manual upgrade process: apt upgrade --without-new-pkgs; apt full-upgrade"
               - "Reference: https://www.debian.org/releases/{{ new_release }}/amd64/release-notes/ch-upgrading.en.html"
-      when:
-        - ansible_facts['distribution'] == 'Debian'
-        - ansible_facts['distribution_release'] == old_release
 # Local Variables:
 # coding: utf-8
 # End:

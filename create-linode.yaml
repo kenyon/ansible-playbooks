@@ -1,8 +1,9 @@
 ---
 # Creates a new Linode.
 
-- hosts: localhost
-  gather_facts: no
+- name: Create Linode
+  hosts: localhost
+  gather_facts: false
   connection: local
   vars:
     my_username: kenyon
@@ -15,7 +16,7 @@
   vars_prompt:
     - name: linode_label
       prompt: New Linode label
-      private: no
+      private: false
   tasks:
     - name: Create Linode {{ linode_label }}
       ansible.builtin.command: >-
@@ -24,6 +25,7 @@
         --type {{ linode_type }}
         --region {{ region }}
       register: linode_create
+      changed_when: true
 
     - name: Set facts of new Linode
       ansible.builtin.set_fact:
@@ -43,6 +45,7 @@
       retries: "{{ retry_count }}"
       delay: "{{ delay_seconds }}"
       until: system_disk is not failed
+      changed_when: true
 
     - name: Create swap disk for {{ linode_label }}
       ansible.builtin.command: >-
@@ -54,6 +57,7 @@
       retries: "{{ retry_count }}"
       delay: "{{ delay_seconds }}"
       until: swap_disk is not failed
+      changed_when: true
 
     - name: Create configuration profile for {{ linode_label }}
       ansible.builtin.command: >-
@@ -67,9 +71,11 @@
       retries: "{{ retry_count }}"
       delay: "{{ delay_seconds }}"
       until: config_profile is not failed
+      changed_when: true
 
     - name: Boot {{ linode_label }}
       ansible.builtin.command: linode-cli linodes boot {{ linode_id }}
+      changed_when: true
 
     - name: Show IPv6 address
       ansible.builtin.debug:
