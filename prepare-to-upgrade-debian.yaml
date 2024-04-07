@@ -7,8 +7,8 @@
   hosts: all
   become: true
   vars:
-    old_release: buster
-    new_release: bullseye
+    old_release: bullseye
+    new_release: bookworm
   tasks:
     - name: Prepare to upgrade Debian
       when:
