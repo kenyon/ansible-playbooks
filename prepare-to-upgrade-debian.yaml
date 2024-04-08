@@ -22,6 +22,14 @@
               - puppet-release
             state: absent
 
+        # systemd-resolved is a separate package in bookworm and not installed
+        # when upgrading.
+        # https://www.debian.org/releases/bookworm/amd64/release-notes/ch-information.en.html#systemd-resolved
+        - name: Install systemd-resolved from bullseye-backports
+          ansible.builtin.apt:
+            name: systemd-resolved
+            default_release: bullseye-backports
+
         - name: Find sources files
           ansible.builtin.find:
             paths: /etc/apt
