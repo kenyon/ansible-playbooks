@@ -54,4 +54,6 @@
             msg:
               - "Now, the manual upgrade process: sudo apt upgrade --without-new-pkgs && sudo apt full-upgrade"
               - "Reference: https://www.debian.org/releases/{{ new_release }}/amd64/release-notes/ch-upgrading.en.html"
-              - "Reinstall Puppet with wget https://apt.puppet.com/puppet8-release-bookworm.deb && sudo apt install ./puppet8-release-bookworm.deb"
+              - "Reinstall Puppet:"
+              - "wget https://apt.puppet.com/puppet8-release-bookworm.deb && sudo apt install ./puppet8-release-bookworm.deb"
+              - "sudo apt update && sudo apt install puppet-agent"
