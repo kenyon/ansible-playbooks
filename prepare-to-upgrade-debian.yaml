@@ -9,6 +9,7 @@
   vars:
     old_release: bullseye
     new_release: bookworm
+    puppet_version: 8
   tasks:
     - name: Prepare to upgrade Debian
       when:
@@ -63,5 +64,5 @@
               - "Now, the manual upgrade process: sudo apt upgrade --without-new-pkgs && sudo apt full-upgrade"
               - "Reference: https://www.debian.org/releases/{{ new_release }}/amd64/release-notes/ch-upgrading.en.html"
               - "Reinstall Puppet:"
-              - "wget https://apt.puppet.com/puppet8-release-bookworm.deb && sudo apt install ./puppet8-release-bookworm.deb"
+              - "wget https://apt.puppet.com/puppet{{ puppet_version }}-release-{{ new_release }}.deb && sudo apt install ./puppet{{ puppet_version }}-release-{{ new_release }}.deb" # noqa yaml[line-length]
               - "sudo apt update && sudo apt install puppet-agent"
