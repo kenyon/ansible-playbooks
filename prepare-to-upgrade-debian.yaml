@@ -22,6 +22,14 @@
               - puppet-release
             state: absent
 
+        - name: Remove Puppet package source files
+          ansible.builtin.file:
+            path: "/etc/apt/sources.list.d/{{ item }}.list"
+            state: absent
+          loop:
+            - pc_repo
+            - puppet-tools
+
         # systemd-resolved is a separate package in bookworm and not installed
         # when upgrading.
         # https://www.debian.org/releases/bookworm/amd64/release-notes/ch-information.en.html#systemd-resolved
