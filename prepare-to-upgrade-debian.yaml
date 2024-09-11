@@ -39,6 +39,12 @@
             name: systemd-resolved
             default_release: bullseye-backports
 
+        - name: Update /etc/nsswitch.conf so that local resolution of domain name works
+          ansible.builtin.lineinfile:
+            path: /etc/nsswitch.conf
+            regexp: "^hosts:"
+            line: "hosts:          resolve [!UNAVAIL=return] files myhostname dns"
+
         - name: Find sources files
           ansible.builtin.find:
             paths: /etc/apt
