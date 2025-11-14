@@ -7,43 +7,22 @@
   hosts: all
   become: true
   vars:
-    old_release: bullseye
-    new_release: bookworm
-    puppet_version: 8
+    old:
+      codename: bookworm
+      version: 12
+    new:
+      codename: trixie
+      version: 13
   tasks:
     - name: Prepare to upgrade Debian
       when:
         - ansible_facts['distribution'] == 'Debian'
-        - ansible_facts['distribution_release'] == old_release
+        - ansible_facts['distribution_release'] == old['codename']
       block:
-        - name: Remove Puppet packages
-          ansible.builtin.package:
-            name:
-              - puppet-agent
-              - puppet-release
-            state: absent
-
-        - name: Remove Puppet package source files
-          ansible.builtin.file:
-            path: "/etc/apt/sources.list.d/{{ item }}.list"
-            state: absent
-          loop:
-            - pc_repo
-            - puppet-tools
-
-        # systemd-resolved is a separate package in bookworm and not installed
-        # when upgrading.
-        # https://www.debian.org/releases/bookworm/amd64/release-notes/ch-information.en.html#systemd-resolved
-        - name: Install systemd-resolved from bullseye-backports
-          ansible.builtin.apt:
-            name: systemd-resolved
-            default_release: bullseye-backports
-
-        - name: Update /etc/nsswitch.conf so that local resolution of domain name works
-          ansible.builtin.lineinfile:
-            path: /etc/nsswitch.conf
-            regexp: "^hosts:"
-            line: "hosts:          resolve [!UNAVAIL=return] files myhostname dns"
+        - name: Stop OpenVox
+          ansible.builtin.service:
+            name: puppet
+            state: stopped
 
         - name: Find sources files
           ansible.builtin.find:
@@ -54,10 +33,16 @@
 
         - name: Replace release codename in sources files
           ansible.builtin.replace:
-            regexp: "{{ old_release }}"
-            replace: "{{ new_release }}"
+            regexp: "{{ old['codename'] }}"
+            replace: "{{ new['codename'] }}"
             path: "{{ item.path }}"
           loop: "{{ sources.files }}"
+
+        - name: Replace version number in OpenVox source file
+          ansible.builtin.replace:
+            regexp: "debian{{ old['version'] }}"
+            replace: "debian{{ new['version'] }}"
+            path: /etc/apt/sources.list.d/openvox.list
 
         - name: Update package cache
           ansible.builtin.apt:
@@ -68,7 +53,4 @@
           ansible.builtin.debug:
             msg:
               - "Now, the manual upgrade process: sudo apt upgrade --without-new-pkgs && sudo apt full-upgrade"
-              - "Reference: https://www.debian.org/releases/{{ new_release }}/amd64/release-notes/ch-upgrading.en.html"
-              - "Reinstall Puppet:"
-              - "wget https://apt.puppet.com/puppet{{ puppet_version }}-release-{{ new_release }}.deb && sudo apt install ./puppet{{ puppet_version }}-release-{{ new_release }}.deb" # noqa yaml[line-length]
-              - "sudo apt update && sudo apt install puppet-agent"
+              - "Reference: https://www.debian.org/releases/{{ new['codename'] }}/release-notes/upgrading.html"
