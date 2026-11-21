@@ -12,7 +12,7 @@
   tasks:
     - name: Ensure ~/.terminfo directory exists
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.terminfo"
+        path: "{{ ansible_facts['user_dir'] }}/.terminfo"
         state: directory
         mode: "0755"
 

@@ -1,5 +1,5 @@
 - name: Ensure my git repo directory exists
   ansible.builtin.file:
     state: directory
-    path: "{{ ansible_user_dir }}/git"
+    path: "{{ ansible_facts['user_dir'] }}/git"
     mode: "0755"
