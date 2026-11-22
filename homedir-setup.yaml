@@ -66,6 +66,7 @@
         - .vim
         - .vimrc
         - .zlogin
+        - .zprofile
         - .zshenv
         - .zshrc
       when: ansible_facts['os_family'] == 'Darwin'
