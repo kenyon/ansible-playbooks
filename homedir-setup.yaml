@@ -11,8 +11,12 @@
           - git
           - gnupg
           - keychain
+          - less
+          - lesspipe
           - pinentry-mac
+          - tmux
           - vim
+          - zsh
           - zsh-autosuggestions
           - zsh-completions
           - zsh-syntax-highlighting
