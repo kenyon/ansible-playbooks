@@ -30,7 +30,7 @@
     password_lock: true
 
 - name: Remove some packages
-  when: ansible_facts.os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
   ansible.builtin.apt:
     name:
       - exim4*
@@ -39,7 +39,7 @@
     purge: true
 
 - name: Install some packages
-  when: ansible_facts.os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
   ansible.builtin.apt:
     update_cache: true
     name:

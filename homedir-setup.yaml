@@ -17,7 +17,7 @@
           - zsh-completions
           - zsh-syntax-highlighting
         state: installed
-      when: ansible_facts.os_family == 'Darwin'
+      when: ansible_facts['os_family'] == 'Darwin'
 
     - name: Create my git repo directory
       ansible.builtin.import_tasks: tasks/ensure-git-dir.yaml
@@ -63,7 +63,7 @@
         - .zlogin
         - .zshenv
         - .zshrc
-      when: ansible_facts.os_family == 'Darwin'
+      when: ansible_facts['os_family'] == 'Darwin'
 
     - name: Create symlinks to more dotfiles
       ansible.builtin.file:
@@ -92,4 +92,4 @@
         path: /opt/homebrew/share
         recurse: true
         mode: go-w
-      when: ansible_facts.os_family == 'Darwin'
+      when: ansible_facts['os_family'] == 'Darwin'
