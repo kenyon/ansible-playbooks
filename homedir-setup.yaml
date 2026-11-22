@@ -89,7 +89,7 @@
 
     - name: Set secure directory permissions to allow zsh to load completions
       ansible.builtin.file:
-        path: /usr/local/share
+        path: /opt/homebrew/share
         recurse: true
         mode: go-w
       when: ansible_facts.os_family == 'Darwin'
