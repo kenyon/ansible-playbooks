@@ -6,7 +6,6 @@ hydrogen.local
 router.local
 
 [macos]
-iMac.local ansible_connection=local
 iMac2.local ansible_connection=local
 
 [linode]
